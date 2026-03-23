@@ -4,6 +4,7 @@ class Resources {
       tileSheet: "/assets/tilesheet.png",
     };
     this.images = {};
+    this.imageMap = {};
 
     Object.keys(this.toLoad).forEach((key) => {
       const img = new Image();
@@ -14,7 +15,16 @@ class Resources {
       };
       img.onload = () => {
         this.images[key].isLoaded = true;
-        console.log("Image loaded");
+        Promise.all([
+          createImageBitmap(img, 0, 0, 16, 16),
+          createImageBitmap(img, 0, 16, 16, 16),
+          createImageBitmap(img, 0, 32, 16, 16),
+          createImageBitmap(img, 16, 0, 16, 16),
+          createImageBitmap(img, 16, 16, 16, 16),
+          createImageBitmap(img, 16, 32, 16, 16),
+        ]).then((bmp) => {
+          this.imageMap["images"] = bmp;
+        });
       };
     });
   }
