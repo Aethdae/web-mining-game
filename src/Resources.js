@@ -6,6 +6,9 @@ class Resources {
     this.images = {};
     this.imageMap = {};
 
+    /*
+     *  Grass, Coal, Copper, Gold, Iron
+     */
     this.resourceTypes = ["grass", "coal", "copper", "gold", "iron"];
 
     Object.keys(this.toLoad).forEach(async (key) => {
@@ -25,11 +28,10 @@ class Resources {
           }
         }
         const bitmaps = await Promise.all(bmps);
-        const imageTypes = ["grass", "coal", "copper", "gold", "iron"];
         this.imageMap = {};
 
         bitmaps.forEach((bmp, index) => {
-          const imageType = imageTypes[Math.floor(index / 3)];
+          const imageType = this.resourceTypes[Math.floor(index / 3)];
           if (!imageType) return;
           if (!this.imageMap[imageType]) {
             this.imageMap[imageType] = [];
@@ -77,6 +79,13 @@ class Resources {
       };
     });
   }
+  getRandSpriteOfType(type) {
+    return this.imageMap[type][getRandNum(3)].image;
+  }
 }
 
 export const resources = new Resources();
+
+function getRandNum(limit) {
+  return Math.floor(Math.random() * limit);
+}

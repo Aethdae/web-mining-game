@@ -1,5 +1,5 @@
 export class Vector2 {
-  constructor(x, y) {
+  constructor(x = 0, y = 0) {
     this.X = x;
     this.Y = y;
   }
