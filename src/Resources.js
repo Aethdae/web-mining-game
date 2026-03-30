@@ -23,7 +23,6 @@ class Resources {
         const bmps = [];
         for (let x = 0; x < img.width; x += 16) {
           for (let y = 0; y < img.height; y += 16) {
-            console.log(img.height, img.width, x, y);
             bmps.push(createImageBitmap(img, x, y, 16, 16));
           }
         }
@@ -75,7 +74,6 @@ class Resources {
         //   }
         //   return this.imageMap;
         // }, {});
-        console.log(this.imageMap);
       };
     });
   }
